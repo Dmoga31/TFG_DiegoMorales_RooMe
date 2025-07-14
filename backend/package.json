@@ -1,0 +1,22 @@
+{
+  "name": "roome-backend",
+  "version": "1.0.0",
+  "description": "Backend for RooMe platform (Node.js + Express + Supabase/Postgres)",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "bcrypt": "^5.1.0",
+    "jsonwebtoken": "^9.0.0",
+    "pg": "^8.11.1",
+    "dotenv": "^16.3.1",
+    "cors": "^2.8.5",
+    "xlsx": "^0.18.5"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  }
+} 
