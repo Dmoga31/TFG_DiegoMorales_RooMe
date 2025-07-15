@@ -13,7 +13,7 @@
     </header>
     <main class="main-content">
       <div class="tabs">
-        <button :class="{active: activeTab === 'users'}" @click="activeTab = 'users'">Usuarios</button>
+        <button :class="{active: activeTab === 'users'}" @click="activeTab = 'users'">Estudiantes</button>
         <button :class="{active: activeTab === 'publications'}" @click="activeTab = 'publications'">Publicaciones</button>
       </div>
       <div v-if="!isAdmin" class="not-admin">
@@ -21,8 +21,8 @@
       </div>
       <div v-else>
         <section v-if="activeTab === 'users'">
-          <h2>Usuarios registrados</h2>
-          <div v-if="loadingUsers">Cargando usuarios...</div>
+          <h2>Estudiantes registrados</h2>
+          <div v-if="loadingUsers">Cargando Estudiantes...</div>
           <div v-else-if="usersError" class="error">{{ usersError }}</div>
           <table v-else class="admin-table">
             <thead>
@@ -156,7 +156,7 @@ export default {
         const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:3000/api'}/admin/users`, {
           headers: { Authorization: `Bearer ${token}` }
         });
-        if (!res.ok) throw new Error('Error al cargar usuarios');
+        if (!res.ok) throw new Error('Error al cargar Estudiantes');
         this.users = await res.json();
       } catch (e) {
         this.usersError = e.message;
