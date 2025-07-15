@@ -20,8 +20,8 @@ function isInstitutionalEmail(email) {
     console.log('Email no termina con dominio institucional:', email);
     return false;
   }
-  const filePath = path.join(__dirname, '../../database/seed_students.xlsx');
-  if (!fs.existsSync(filePath)) {
+  const filePath = path.join(__dirname, '../../../database/seed_students.xlsx');
+    if (!fs.existsSync(filePath)) {
     console.log('No existe el archivo seed_students.xlsx en:', filePath);
     return false;
   }
