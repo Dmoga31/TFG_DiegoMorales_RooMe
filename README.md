@@ -37,22 +37,11 @@ Aplicación web para facilitar la búsqueda de habitaciones y compañeros de pis
 
 **Railway** - Para backend y base de datos (https://railway.app)
 
-## Comparativa de Tecnologías y Herramientas de Despliegue
-
-| Categoría                | Tecnología / Herramienta   | Ventajas principales                                                                 |
-|--------------------------|----------------------------|----------------------------------------------------------------------------------------|
-| **Frontend**             | **Vue.js**                 | - Curva de aprendizaje baja  <br> - Alta reactividad y rendimiento  <br> - Comunidad activa |
-| **Backend**              | **Node.js + Express**      | - Arquitectura ligera y eficiente para APIs REST  <br> - Uso de JavaScript full-stack |
-| **Base de Datos**        | **PostgreSQL**             | - Sistema robusto y fiable  <br> - Soporte para consultas complejas y relaciones      |
-| **Despliegue Frontend**  | **Vercel**                 | - Fácil integración con GitHub  <br> - Deploy automático  <br> - CDN global de alto rendimiento |
-| **Despliegue Backend + DB** | **Railway**             | - Panel intuitivo  <br> - Rápida configuración de servidor y base de datos  <br> - Escalabilidad sencilla |
-
-
 
 ## 📊 Diagramas UML
 
 ### Modelo de Dominio
-<img width="667" height="968" alt="image" src="https://github.com/user-attachments/assets/7e8c6b61-a438-42bb-a888-e53829442c33" />
+<img width="596" height="561" alt="image" src="https://github.com/user-attachments/assets/bbf58c1e-ab75-4a89-8606-4270f0c7c339" />
 
 ### Actores
 <img width="674" height="392" alt="image" src="https://github.com/user-attachments/assets/1d746e75-4bc2-4a2a-a78a-7f28f16eec4d" />
