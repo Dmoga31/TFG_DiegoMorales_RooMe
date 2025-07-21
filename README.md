@@ -63,10 +63,10 @@ Aplicación web para facilitar la búsqueda de habitaciones y compañeros de pis
 <img width="357" height="99" alt="image" src="https://github.com/user-attachments/assets/8323de5b-fb53-4747-b843-c3e05affbc42" />
 
 #### Estudiante
-<img width="1278" height="986" alt="image" src="https://github.com/user-attachments/assets/a7bf92ac-64d7-4a52-bc35-c63f54d56078" />
+<img width="1296" height="987" alt="image" src="https://github.com/user-attachments/assets/f95b5bd1-7c81-4d38-820c-814ab038733f" />
 
 #### Administrador
-<img width="674" height="984" alt="image" src="https://github.com/user-attachments/assets/8d243832-5eb7-402b-9933-bbf2dc8bbdd2" />
+<img width="674" height="934" alt="image" src="https://github.com/user-attachments/assets/b844f8f2-e363-4761-96ae-5d2191baa2c7" />
 
 ### Diagramas de contexto
 
