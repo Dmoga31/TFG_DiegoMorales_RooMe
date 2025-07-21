@@ -1,0 +1,139 @@
+@startuml ModeloER_RoomE_Completo
+
+skinparam {
+    class {
+        BackgroundColor #F0F8FF
+        BorderColor #333
+        FontSize 14
+        FontName Arial
+    }
+    arrow {
+        Color #666
+        FontSize 12
+    }
+}
+
+' Entidades principales
+class Estudiante {
+    + id (PK)
+    --
+    - nombre
+    - apellidos
+    - correoInstitucional
+    - rol
+    - password
+}
+
+class Carrera {
+    + id (PK)
+    --
+    - nombre
+}
+
+class InformacionPersonal {
+    + id (PK)
+    + estudiante_id (FK)
+    + carrera_id (FK)
+    --
+    - whatsapp
+    - instagram
+    - edad
+    - genero <<Enum>> \n[Masculino, Femenino, Otro]
+    - fotoPerfil
+}
+
+class Publicacion {
+    + id (PK)
+    + estudiante_id (FK)
+    --
+    - tipo <<Enum>> \n[Habitacion, Perfil]
+    - fechaCreacion
+    - estado <<Enum>> \n[Activa, Desactivada]
+    - descripcion
+}
+
+class PublicacionHabitacion {
+    + id (PK)
+    + publicacion_id (FK)
+    --
+    - direccion
+    - precio
+    - tipoContrato <<Enum>> \n[Fijo, Escolar]
+}
+
+class HabitacionFoto {
+    + id (PK)
+    + habitacion_id (FK)
+    --
+    - ruta
+}
+
+class PublicacionPerfilRooMe {
+    + id (PK)
+    + publicacion_id (FK)
+    --
+    - descripcionPersonal
+    - presupuesto
+}
+
+class Hobby {
+    + id (PK)
+    --
+    - nombre
+}
+
+class PerfilHobby {
+    + id (PK)
+    + perfil_id (FK)
+    + hobby_id (FK)
+}
+
+class Requisito {
+    + id (PK)
+    --
+    - nombre
+}
+
+class HabitacionRequisito {
+    + id (PK)
+    + habitacion_id (FK)
+    + requisito_id (FK)
+}
+
+' Relaciones
+Estudiante ||--o{ Publicacion : "crea"
+Estudiante ||--|| InformacionPersonal : "tiene"
+InformacionPersonal }o--|| Carrera : "pertenece a"
+Publicacion ||--|| PublicacionHabitacion : "puede ser"
+Publicacion ||--|| PublicacionPerfilRooMe : "puede ser"
+PublicacionPerfilRooMe ||--o{ PerfilHobby
+PerfilHobby }o--|| Hobby
+PublicacionHabitacion ||--o{ HabitacionRequisito
+HabitacionRequisito }o--|| Requisito
+PublicacionHabitacion ||--o{ HabitacionFoto : "tiene fotos"
+
+' Notas explicativas
+note top of PublicacionHabitacion
+    <b>Datos de habitación:</b>
+    • Dirección exacta
+    • Precio mensual
+    • Tipo de contrato
+    • Requisitos asociados (máx 3)
+    • Hasta 3 fotos (ruta en tabla separada)
+end note
+
+note bottom of PublicacionPerfilRooMe
+    <b>Datos de perfil:</b>
+    • Descripción personal
+    • Hobbies asociados (máx 3)
+    • Presupuesto disponible
+end note
+
+note right of Publicacion
+    **Restricción:**
+    Cada estudiante puede tener:
+    • 1 publicación de habitación
+    • 1 publicación de perfil
+end note
+
+@enduml

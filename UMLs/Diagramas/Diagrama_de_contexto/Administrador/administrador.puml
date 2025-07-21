@@ -1,0 +1,82 @@
+@startuml
+
+skinparam state {
+  BackgroundColor #F0F8FF
+  BorderColor #333
+  FontSize 14
+  FontName Arial
+  Padding 15
+  ArrowFontSize 12
+}
+
+hide empty description
+
+[*] --> INICIO
+
+INICIO --> Sistema : login
+
+state Sistema {
+
+    MENU_PRINCIPAL --> NUEVA_PUBLICACION
+
+    NUEVA_PUBLICACION --> CREAR_PUBLICACION_HABITACION
+
+    CREAR_PUBLICACION_HABITACION --> VER_PUBLICACIONES_HABITACION
+
+    NUEVA_PUBLICACION --> CREAR_PUBLICACION_PERFIL
+
+    CREAR_PUBLICACION_PERFIL --> VER_PUBLICACIONES_PERFIL
+
+    MENU_PRINCIPAL --> VER_PUBLICACIONES_HABITACION
+        note left of VER_PUBLICACIONES_HABITACION
+            listarPublicacionesHabitacion
+            verDetalleHabitacion
+            filtrarPublicacionesHabitacion
+        end note
+
+    MENU_PRINCIPAL --> VER_PUBLICACIONES_PERFIL
+        note right of VER_PUBLICACIONES_PERFIL
+            listarPublicacionesPerfil
+            verDetallePerfil
+            filtrarPublicacionesPerfil
+        end note
+
+    MENU_PRINCIPAL --> MI_PERFIL
+        note on link
+            verMiPerfil
+            editarMiPerfil
+        end note
+
+    MI_PERFIL --> MIS_PUBLICACIONES
+        note on link
+            verMisPublicaciones
+            editarMisPublicaciones
+            ocultarActivarMisPublicaciones
+            borrarMisPublicaciones
+        end note
+
+     PANEL_ADMIN --> MENU_PRINCIPAL
+        note left of PANEL_ADMIN
+            gestionEstudiantes
+            gestionPublicaciones
+        end note
+
+    PANEL_ADMIN --> VER_ESTUDIANTES
+        note on link
+            editarCuenta
+            filtrarCuentas
+            borrarCuenta
+        end note
+
+    PANEL_ADMIN --> VER_PUBLICACIONES
+        note on link
+            editarPublicacion
+            filtrarPublicaciones
+            ocultarPublicacion
+            borrarPublicacion
+        end note
+}
+
+Sistema --> [*] : Logout
+
+@enduml

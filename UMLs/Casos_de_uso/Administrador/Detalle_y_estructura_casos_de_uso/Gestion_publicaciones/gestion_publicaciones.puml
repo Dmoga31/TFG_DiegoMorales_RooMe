@@ -1,0 +1,36 @@
+@startuml AdminGestionPublicaciones
+
+left to right direction
+actor "Administrador" as Admin <<Admin>>
+
+package "Gestión de Publicaciones" {
+    usecase "Listar publicaciones" as UC_Listar
+    usecase "Ver publicación" as UC_Ver
+    usecase "Crear publicación" as UC_CrearPub
+    usecase "Filtrar publicaciones" as UC_Filtrar
+    usecase "Editar publicación" as UC_ModPost
+    usecase "Ocultar publicación" as UC_HidePost
+    usecase "Activar publicación" as UC_ShowPost
+    usecase "Eliminar publicación" as UC_DelPost
+    
+    UC_Ver .> UC_Listar : <<include>>
+    UC_Filtrar ..> UC_Listar : <<extend>>
+    UC_ModPost ..> UC_Listar : <<extend>>
+    UC_HidePost ..> UC_Listar : <<extend>>
+    UC_ShowPost ..> UC_Listar : <<extend>>
+    UC_DelPost ..> UC_Listar : <<extend>>
+}
+
+Admin -u-> UC_CrearPub
+Admin -u-> UC_Listar
+
+note right of UC_Listar
+  Control total sobre todas las publicaciones.
+  Permite:
+  - Moderar contenido
+  - Cambiar visibilidad
+  - Editar cualquier publicación
+  - Eliminar contenido inapropiado
+end note
+
+@enduml

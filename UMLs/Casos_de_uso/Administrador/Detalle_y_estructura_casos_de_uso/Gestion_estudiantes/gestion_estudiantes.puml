@@ -1,0 +1,27 @@
+@startuml AdminGestionUsuarios
+
+left to right direction
+actor "Administrador" as Admin <<Admin>>
+
+package "Gestión de Estudiantes" {
+    usecase "Listar estudiantes" as UC_ListarUser
+    usecase "Crear estudiante" as UC_CrearUser
+    usecase "Editar estudiante" as UC_EditarUser
+    usecase "Eliminar estudiante" as UC_EliminarUser
+    
+    UC_EditarUser ..> UC_ListarUser : <<extend>>
+    UC_EliminarUser ..> UC_ListarUser : <<extend>>
+}
+
+Admin --> UC_CrearUser
+Admin -u-> UC_ListarUser
+
+note right of UC_ListarUser
+  Acceso completo a todos los usuarios.
+  Permite:
+  - Ver detalles
+  - Editar información
+  - Eliminar cuentas
+end note
+
+@enduml

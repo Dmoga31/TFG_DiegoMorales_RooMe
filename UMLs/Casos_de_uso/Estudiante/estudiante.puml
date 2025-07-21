@@ -1,0 +1,51 @@
+@startuml ActoresSistema
+
+left to right direction
+
+actor Estudiante as E << (G,#90EE90) >>
+
+rectangle "Autenticación" as auth {
+  usecase "Login" as UC_Login
+  usecase "Logout" as UC_Logout
+}
+
+rectangle "Publicaciones Generales" as pub_gen {
+  usecase "Listar publicaciones" as UC_Listar
+  usecase "Filtrar publicaciones" as UC_Filtrar
+  usecase "Ver publicación" as UC_Ver
+  usecase "Crear publicación" as UC_Crear
+}
+
+rectangle "Publicaciones Propias" as pub_propias {
+  usecase "Listar publicaciones creadas" as UC_ListarCreadas
+  usecase "Ver publicación creada" as UC_VerCreada
+  usecase "Editar publicación" as UC_Editar
+  usecase "Desactivar publicación" as UC_HidePost
+  usecase "Activar publicación" as UC_ShowPost
+  usecase "Eliminar publicación" as UC_Eliminar
+}
+
+rectangle "Gestión de Perfil" as perfil {
+  usecase "Ver Perfil" as UC_VerPerfil
+  usecase "Editar Perfil" as UC_EditarPerfil
+  usecase "Ver Perfil Estudiante" as UC_VerPerfilUsuario
+}
+
+' Relaciones
+E --> auth
+E --> pub_gen
+E --> pub_propias
+E --> perfil
+
+' Conexiones entre casos de uso (opcional)
+UC_Listar --> UC_Filtrar : <<extend>>
+UC_Listar --> UC_Ver : <<include>>
+UC_Ver --> UC_VerPerfilUsuario : <<extend>>
+UC_VerPerfil --> UC_EditarPerfil : <<extend>>
+UC_ListarCreadas --> UC_VerCreada : <<include>>
+UC_ListarCreadas --> UC_Editar : <<extend>>
+UC_ListarCreadas --> UC_HidePost : <<extend>>
+UC_ListarCreadas --> UC_ShowPost : <<extend>>
+UC_ListarCreadas --> UC_Eliminar : <<extend>>
+
+@enduml

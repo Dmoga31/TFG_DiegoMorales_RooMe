@@ -1,0 +1,35 @@
+@startuml DiagramaDespliegue_RoomE_Simplificado
+skinparam {
+    node {
+        BackgroundColor #F0F8FF
+        BorderColor #333
+        FontSize 14
+        FontName Arial
+    }
+    arrow {
+        Color #006400
+        FontSize 12
+    }
+}
+
+node "Cliente" as cliente {
+}
+
+node "Vercel (Frontend Vue.js)" as vercel {
+}
+
+node "Railway (Backend Node.js/Express)" as railway {
+}
+
+database "PostgreSQL (Railway)" as postgres {
+}
+
+cliente --> vercel : **HTTPS**\nSolicita página/app
+vercel --> cliente : **HTML/CSS/JS**\nApp renderizada
+
+cliente -> railway : **HTTPS (API REST)**\nSolicitudes de datos
+railway -> postgres : **SQL**\nConsultas y transacciones
+postgres --> railway : **Resultados SQL**\nDatos
+railway --> cliente : **JSON**\nRespuesta API
+
+@enduml

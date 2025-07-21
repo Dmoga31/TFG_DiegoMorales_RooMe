@@ -1,0 +1,29 @@
+@startuml GestionPublicaciones
+
+left to right direction
+actor "Estudiante" as Estudiante
+
+package "Publicaciones Generales" {
+    usecase "Crear publicación" as UC_Crear
+    usecase "Listar publicaciones" as UC_Listar
+    usecase "Filtrar publicaciones" as UC_Filtrar
+    usecase "Ver publicación" as UC_Ver
+    usecase "Ver Estudiante" as UC_VerUsuario
+    
+    UC_Filtrar ..> UC_Listar : <<extend>>
+    UC_Ver .> UC_Listar : <<include>>
+    UC_VerUsuario .> UC_Ver : <<extend>>
+}
+
+Estudiante --> UC_Crear
+Estudiante --> UC_Listar
+
+note top of UC_Listar
+  Acceso público a todas las publicaciones
+  del sistema. Cualquier usuario puede:
+  - Filtrar el listado
+  - Ver detalles completos
+  - Consultar perfiles de autores
+end note
+
+@enduml

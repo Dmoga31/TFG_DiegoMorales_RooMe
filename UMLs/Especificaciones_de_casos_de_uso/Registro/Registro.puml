@@ -1,0 +1,60 @@
+@startuml
+skinparam BackgroundColor transparent
+skinparam NoteBackgroundColor LightYellow
+skinparam NoteBorderColor #DDDDDD
+skinparam Rectangle {
+    BackgroundColor LightSkyBlue
+    BorderColor SteelBlue
+}
+skinparam Diamond {
+    BackgroundColor LightSkyBlue
+    BorderColor SteelBlue
+}
+
+state "Inicio Registro" as inicioRegistro
+state "Pantalla Registro" as registro {
+    state "Formulario Vacío" as formularioVacio
+    note right of formularioVacio
+        <b>Sistema solicita:
+        - Nombre
+        - Apellidos 
+        - Correo institucional (@alumnos.uneatlantico.es)
+        - Contraseña
+        - Confirmación de contraseña
+        - Carrera 
+        - Género
+        - Edad
+        - WhatsApp
+        - Instagram
+        - Foto de perfil (opcional)
+    end note
+    
+    state "Ingreso de Datos" as ingresoDatos
+    note right of ingresoDatos
+        <b>Usuario completa todos los campos y envía el formulario</b>
+    end note
+
+    state "Validación de Datos" as validacionDatos <<choice>>
+}
+
+state "Registro Exitoso" as registroExitoso
+state "Rechazo Registro" as rechazoRegistro
+
+inicioRegistro --> formularioVacio : Usuario solicita registro
+formularioVacio --> ingresoDatos : Usuario completa campos
+ingresoDatos --> validacionDatos : Envía formulario
+
+validacionDatos -[#red]-> rechazoRegistro : Correo NO válido\nen Excel institucional
+validacionDatos -[#orange]-> ingresoDatos : Contraseñas no coinciden\no campos inválidos
+validacionDatos -[#green]-> registroExitoso : Todos los datos\nson válidos
+
+note left of validacionDatos
+    <b>Validaciones simultáneas:
+    1. Correo: dominio @alumnos.uneatlantico.es
+       y existe en base Excel
+    2. Contraseñas coinciden y son seguras
+    3. Campos obligatorios completos
+    4. Edad válida (≥18)
+end note
+
+@enduml

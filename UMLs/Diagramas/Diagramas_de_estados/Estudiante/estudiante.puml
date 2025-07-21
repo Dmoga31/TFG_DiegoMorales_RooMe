@@ -1,0 +1,38 @@
+@startuml EstadoEstudianteSimplificado
+
+skinparam state {
+    BackgroundColor #F0F8FF
+    BorderColor #333
+    FontSize 14
+    FontName Arial
+}
+
+[*] --> Login : Ingreso al sistema
+Login --> MenuPrincipal : Acceso correcto
+
+state MenuPrincipal {
+
+    [*] --> CrearPublicacion
+    [*] --> VerPublicaciones
+    VerPublicaciones --> VerDetallePublicacion
+
+
+    [*] --> VerPerfil : Ver perfil propio
+
+    state VerPerfil {
+        [*] --> EditarPerfil
+        [*] --> MisPublicaciones
+
+        state MisPublicaciones {
+            [*] --> EditarPublicacion
+            [*] --> ActivarPublicacion
+            [*] --> DesactivarPublicacion
+            [*] --> EliminarPublicacion
+        }
+    }
+}
+
+MenuPrincipal --> Logout : Cerrar sesión
+Logout --> [*]
+
+@enduml

@@ -1,0 +1,9 @@
+@startuml 
+left to right direction
+actor "Usuario no registrado" as Anonimo
+rectangle Sistema {
+  usecase "Registrarse" as UC1
+}
+Anonimo --> UC1
+
+@enduml

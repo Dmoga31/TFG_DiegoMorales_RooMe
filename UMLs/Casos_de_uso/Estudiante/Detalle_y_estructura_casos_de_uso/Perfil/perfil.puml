@@ -1,0 +1,17 @@
+@startuml PerfilesDiagram
+
+left to right direction
+
+actor "Estudiante" as Estudiante
+
+package "Perfil" {
+    usecase "Ver mi perfil" as UC_VerPerfil
+    usecase "Editar mi perfil" as UC_EditarPerfil
+    
+    UC_EditarPerfil ..> UC_VerPerfil : <<extend>> "Acción dentro\nde la vista"
+}
+
+Estudiante --> UC_VerPerfil
+
+
+@enduml

@@ -1,0 +1,54 @@
+@startuml
+skinparam BackgroundColor transparent
+skinparam NoteBackgroundColor LightYellow
+skinparam NoteBorderColor #DDDDDD
+skinparam Rectangle {
+    BackgroundColor LightSkyBlue
+    BorderColor SteelBlue
+}
+skinparam Diamond {
+    BackgroundColor LightSkyBlue
+    BorderColor SteelBlue
+}
+
+state "Inicial" as inicio
+state "Pantalla Nueva Publicación" as nueva_publicacion {
+    state "Selección de tipo" as empty1
+    note right of empty1
+        <b>Sistema solicita:
+        • Tipo de publicación
+    end note
+    
+    state "Ingreso de datos" as empty2
+    note right of empty2
+        <b>Usuario ingresa:
+        - Datos específicos
+        (según tipo elegido)
+    end note
+
+    state "Validación" as validacion <<choice>>
+}
+
+state "Listado Publicaciones" as listarPublicaciones
+
+inicio --> empty1 : Usuario selecciona\n"Nueva Publicación"
+empty1 --> empty2 : Selecciona tipo
+empty2 --> validacion : Envía formulario
+
+validacion -[#red]-> empty2 : Datos\ninválidos
+validacion -[#green]-> listarPublicaciones : Publicación\ncreada
+
+note left of validacion
+    <b>Validación verifica:
+    1. Campos obligatorios
+    2. Formatos correctos
+    3. Documentos válidos
+end note
+
+note left of empty1
+    <b>Tipos disponibles:
+    • Habitación
+    • Perfil RooMe
+end note
+
+@enduml

@@ -1,0 +1,15 @@
+@startuml AdminAuthDiagram
+
+left to right direction
+
+actor "Administrador" as Admin <<Admin>>
+
+package "Autenticación" {
+    usecase "Login" as UC_Login
+    usecase "Logout" as UC_Logout
+}
+
+Admin --> UC_Login
+Admin --> UC_Logout
+
+@enduml

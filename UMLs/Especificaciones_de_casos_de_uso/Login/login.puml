@@ -1,0 +1,47 @@
+@startuml
+skinparam BackgroundColor transparent
+skinparam NoteBackgroundColor LightYellow
+skinparam NoteBorderColor #DDDDDD
+skinparam Rectangle {
+    BackgroundColor LightSkyBlue
+    BorderColor SteelBlue
+}
+skinparam Diamond {
+    BackgroundColor LightSkyBlue
+    BorderColor SteelBlue
+}
+
+
+state "Inicial" as inicio
+state "Pantalla Login" as login {
+    state "Credenciales" as empty1
+    note right of empty1
+        <b>Sistema solicita credenciales</b>
+    end note
+    
+    state "Ingreso de datos" as empty2
+    note right of empty2
+        <b>Usuario ingresa:
+        - Correo institucional
+        - Contraseña
+    end note
+
+    state "Validación" as validacion <<choice>>
+}
+
+state "Sistema Principal" as pantallaPrincipal
+
+inicio --> empty1 : Usuario solicita login
+empty1 --> empty2
+empty2 --> validacion
+
+validacion -[#red]-> empty1 : Credenciales\nincorrectas
+validacion -[#green]-> pantallaPrincipal : Credenciales\ncorrectas
+
+note left of validacion
+    <b>Validación verifica:
+    1. Correo existe
+    2. Contraseña coincide
+end note
+
+@enduml

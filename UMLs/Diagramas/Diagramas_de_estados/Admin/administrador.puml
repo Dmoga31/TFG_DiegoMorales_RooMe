@@ -1,0 +1,41 @@
+@startuml PanelAdmin_Detallado_SinNotas
+
+skinparam state {
+    BackgroundColor #F0F8FF
+    BorderColor #333
+    FontSize 14
+    FontName Arial
+}
+
+[*] --> Login : Ingreso al sistema
+Login --> MenuAdmin : Acceso correcto
+
+state MenuAdmin {
+
+    [*] --> MenuPrincipal
+
+    state MenuPrincipal {
+        ' Representado como vacío
+    }
+
+    state GestionEstudiantes {
+        [*] --> ListarEstudiantes
+        ListarEstudiantes --> CrearEstudiante
+        ListarEstudiantes --> EditarEstudiante
+        ListarEstudiantes --> EliminarEstudiante
+    }
+
+    state GestionPublicaciones {
+        [*] --> ListarPublicaciones
+        ListarPublicaciones --> CrearPublicacion
+        ListarPublicaciones --> EditarPublicacion
+        ListarPublicaciones --> EliminarPublicacion
+        ListarPublicaciones --> ActivarPublicacion
+        ListarPublicaciones --> DesactivarPublicacion
+    }
+}
+
+MenuAdmin --> Logout : Cerrar sesión
+Logout --> [*]
+
+@enduml

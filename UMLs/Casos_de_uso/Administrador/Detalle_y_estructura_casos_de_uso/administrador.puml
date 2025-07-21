@@ -1,0 +1,48 @@
+@startuml CasosDeUsoAdministrador
+
+left to right direction
+
+actor Administrador as A << (R,#FFCCCB) >>
+
+rectangle "Autenticación" as auth {
+  usecase "Login" as UC_Login
+  usecase "Logout" as UC_Logout
+}
+
+rectangle "Gestión de Usuarios" as user_mgmt {
+  usecase "Crear estudiante" as UC_CrearUser
+  usecase "Listar estudiantes" as UC_ListarUser
+  usecase "Editar estudiante" as UC_EditarUser
+  usecase "Eliminar estudiante" as UC_EliminarUser
+}
+
+rectangle "Gestión de Publicaciones" as pub_mgmt {
+  usecase "Crear publicación" as UC_CrearPub
+  usecase "Listar publicaciones" as UC_Listar
+  usecase "Ver publicación" as UC_Ver
+  usecase "Editar publicación" as UC_ModPost
+  usecase "Eliminar publicación" as UC_DelPost
+  usecase "Ocultar publicación" as UC_HidePost
+  usecase "Activar publicación" as UC_ShowPost
+  usecase "Filtrar publicaciones" as UC_Filtrar
+
+}
+
+
+
+' Relaciones principales
+A --> auth
+A --> user_mgmt
+A --> pub_mgmt
+
+' Relaciones entre casos de uso
+UC_Listar --> UC_Ver : <<include>>
+UC_Listar --> UC_Filtrar : <<extend>>
+UC_ListarUser --> UC_EditarUser : <<extend>>
+UC_ListarUser --> UC_EliminarUser : <<extend>>
+UC_Listar --> UC_ModPost : <<extend>>
+UC_Listar --> UC_DelPost : <<extend>>
+UC_Listar --> UC_HidePost : <<extend>>
+UC_Listar --> UC_ShowPost : <<extend>>
+
+@enduml

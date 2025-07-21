@@ -1,0 +1,39 @@
+@startuml JerarquiaActores
+
+skinparam actor {
+    BackgroundColor #F0F8FF
+    BorderColor #333
+    FontSize 14
+    FontName Arial
+}
+
+skinparam usecase {
+    BackgroundColor #E6E6FA
+    BorderColor #666
+}
+
+actor UsuarioNoRegistrado << (Y,LightGray) >> as Anonimo
+actor Estudiante << (G,#90EE90) >> as Estudiante
+actor Administrador << (R,#FFCCCB) >> as Admin
+
+    Anonimo --|> Estudiante : "Se registra"
+    Estudiante --|> Admin : " (privilegios)"
+
+
+note right of Anonimo
+    <b>Usuario no registrado</b>
+    Solo puede registrarse
+end note
+
+note left of Estudiante
+    <b>Estudiante</b>
+    Crea, actualiza y elimina sus publicaciones
+end note
+
+note left of Admin
+    <b>Administrador</b>
+    Control total sobre
+    usuarios y publicaciones
+end note
+
+@enduml

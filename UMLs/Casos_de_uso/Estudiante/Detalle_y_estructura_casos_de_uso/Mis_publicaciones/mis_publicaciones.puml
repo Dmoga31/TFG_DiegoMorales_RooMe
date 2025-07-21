@@ -1,0 +1,33 @@
+@startuml GestionPublicacionesCreadas
+
+left to right direction
+actor "Estudiante" as Estudiante
+
+package "Gestión de Publicaciones Creadas" {
+    usecase "Listar publicaciones creadas" as UC_ListarCreadas
+    usecase "Ver publicación creada" as UC_VerCreada
+    usecase "Editar publicación" as UC_Editar
+    usecase "Activar publicación" as UC_Activar
+    usecase "Desactivar publicación" as UC_Desactivar 
+    usecase "Eliminar publicación" as UC_Eliminar
+    
+    UC_VerCreada .> UC_ListarCreadas : <<include>>
+    UC_Editar ..> UC_ListarCreadas : <<extend>>
+    UC_Activar ..> UC_ListarCreadas : <<extend>>
+    UC_Desactivar ..> UC_ListarCreadas : <<extend>>
+    UC_Eliminar ..> UC_ListarCreadas : <<extend>>
+}
+
+Estudiante -u-> UC_ListarCreadas
+
+note top of UC_ListarCreadas
+  Acceso exclusivo a publicaciones
+  propias desde "Mi perfil".
+  Permite:
+  - Ver en detalle
+  - Modificar contenido
+  - Cambiar visibilidad
+  - Eliminar permanentemente
+end note
+
+@enduml

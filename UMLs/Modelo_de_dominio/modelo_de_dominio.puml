@@ -1,0 +1,61 @@
+@startuml ModeloDominioRoomE
+
+' Entidades principales
+Class Estudiante {
+
+}
+
+Class InformacionPersonal {
+
+}
+
+Class Carrera {
+
+}
+
+Class Publicacion {
+
+}
+
+Class PublicacionHabitacion {
+
+}
+
+Class HabitacionFoto {
+ 
+}
+
+Class HabitacionRequisito {
+
+}
+
+Class Requisito {
+
+}
+
+Class PublicacionPerfilRooMe {
+ 
+}
+
+Class PerfilHobby {
+
+}
+
+Class Hobby {
+
+}
+
+' Relaciones
+Estudiante -- InformacionPersonal : tiene >
+InformacionPersonal -- Carrera : estudia >
+Estudiante -- Publicacion : crea >
+Publicacion -- PublicacionHabitacion : puede ser >
+Publicacion -- PublicacionPerfilRooMe : puede ser >
+PublicacionHabitacion -- HabitacionFoto : tiene >
+PublicacionHabitacion  --  HabitacionRequisito : tiene >
+HabitacionRequisito  --  Requisito : contiene >
+PublicacionPerfilRooMe  --  PerfilHobby : tiene >
+PerfilHobby  --  Hobby : contiene >
+
+
+@enduml
