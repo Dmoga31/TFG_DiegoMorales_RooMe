@@ -8,10 +8,3 @@
 
  - ## Usuario no registrado
    ![Caso_uso_Usuario_no_registrado](https://github.com/user-attachments/assets/485ba9c6-ed3b-4018-a951-3ea8874b46e6)
-
-
-<h2 style="text-decoration: underline;">📁 Enlaces a carpetas de dettalles y estructuras de casos de uso</h2>
-
-- [📂 Detalle y estructura de casos de uso de estudiante](https://github.com/Dmoga31/TFG_DiegoMorales_RooMe/tree/main/UMLs/Casos_de_uso/Estudiante/Detalle_y_estructura_casos_de_uso)
-
-- [📂 Detalle y estructura de casos de uso de administrador](https://github.com/Dmoga31/TFG_DiegoMorales_RooMe/tree/main/UMLs/Casos_de_uso/Administrador/Detalle_y_estructura_casos_de_uso)
