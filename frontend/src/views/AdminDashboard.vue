@@ -22,6 +22,15 @@
       <div v-else>
         <section v-if="activeTab === 'users'">
           <h2>Estudiantes registrados</h2>
+          <div class="user-actions">
+            <div class="search-bar">
+              <i class="fa-solid fa-magnifying-glass search-icon"></i>
+              <input type="text" v-model="userSearchQuery" placeholder="Buscar por nombre o apellidos..." class="search-input" />
+            </div>
+            <button @click="goToCreateUser" class="create-user-btn">
+              <i class="fa-solid fa-plus"></i> Crear Nuevo Usuario
+            </button>
+          </div>
           <div v-if="loadingUsers">Cargando Estudiantes...</div>
           <div v-else-if="usersError" class="error">{{ usersError }}</div>
           <table v-else class="admin-table">
@@ -36,7 +45,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="user in users" :key="user.id">
+              <tr v-for="user in filteredUsers" :key="user.id">
                 <td>{{ user.id }}</td>
                 <td>{{ user.nombre }}</td>
                 <td>{{ user.apellidos }}</td>
@@ -44,8 +53,12 @@
                 <td>{{ user.rol || user.role || 'Estudiante' }}</td>
                 <td>
                   <!-- Acciones: editar/eliminar (placeholder) -->
-                  <button @click="editUser(user)">Editar</button>
-                  <button v-if="!isCurrentAdmin(user) && user.rol !== 'Admin'" @click="deleteUser(user)">Eliminar</button>
+                  <button v-if="!isCurrentAdmin(user) && user.rol !== 'Admin'" @click="deleteUser(user)" class="delete-btn">
+                    <i class="fa-solid fa-trash"></i>
+                  </button>
+                  <button @click="editUser(user)">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                  </button>
                 </td>
               </tr>
             </tbody>
@@ -54,12 +67,18 @@
         <section v-else-if="activeTab === 'publications'">
           <h2>Todas las publicaciones</h2>
           <div class="filter-bar">
-            <label>Filtrar por tipo:</label>
-            <select v-model="publicationFilter" class="filter-select">
-              <option value="all">Todas</option>
-              <option value="Habitacion">Habitaciones</option>
-              <option value="Perfil">Perfil RooMe</option>
-            </select>
+            <div>
+              <label>Filtrar por tipo:</label>
+              <select v-model="publicationFilter" class="filter-select">
+                <option value="all">Todas</option>
+                <option value="Habitacion">Habitaciones</option>
+                <option value="Perfil">Perfil RooMe</option>
+              </select>
+            </div>
+            <div class="search-bar publication-search">
+              <i class="fa-solid fa-magnifying-glass search-icon"></i>
+              <input type="text" v-model="publicationUserFilter" placeholder="Buscar por nombre de estudiante..." class="search-input" />
+            </div>
           </div>
           <div v-if="loadingPublications">Cargando publicaciones...</div>
           <div v-else-if="publicationsError" class="error">{{ publicationsError }}</div>
@@ -70,7 +89,7 @@
                 <th>Tipo</th>
                 <th>Descripción</th>
                 <th v-if="pubsHasDireccion">Dirección</th>
-                <th>Usuario</th>
+                <th>Nombre del Estudiante</th>
                 <th>Estado</th>
                 <th>Acciones</th>
               </tr>
@@ -83,7 +102,7 @@
                 <!-- Solo mostrar la columna Dirección si la publicación es de tipo Habitacion -->
                 <td v-if="pub.type === 'Habitacion'">{{ pub.direccion }}</td>
                 <td v-else-if="pubsHasDireccion"></td>
-                <td>{{ pub.user_id }}</td>
+                <td>{{ getUserName(pub.user_id) }}</td>
                 <td>{{ pub.status === 'Activa' ? 'Activa' : 'Inactiva' }}</td>
                 <td class="actions-cell">
                   <button @click="togglePublicationStatus(pub)" :title="pub.status === 'Activa' ? 'Desactivar' : 'Activar'" class="icon-btn action-btn">
@@ -92,7 +111,9 @@
                   <button @click="deletePublication(pub)" title="Eliminar" class="icon-btn delete-btn action-btn">
                     <i class="fa-solid fa-trash"></i>
                   </button>
-                  <button @click="editPublication(pub)" class="edit-btn action-btn">Editar</button>
+                  <button @click="editPublication(pub)" class="edit-btn action-btn">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                  </button>
                 </td>
               </tr>
             </tbody>
@@ -117,6 +138,8 @@ export default {
       publicationsError: '',
       loadingPublications: false,
       publicationFilter: 'all',
+      userSearchQuery: '',
+      publicationUserFilter: '',
     }
   },
   computed: {
@@ -128,8 +151,39 @@ export default {
       return this.publications.some(pub => pub.type === 'Habitacion');
     },
     filteredPublications() {
-      if (this.publicationFilter === 'all') return this.publications;
-      return this.publications.filter(pub => pub.type === this.publicationFilter);
+      let filtered = [...this.publications];
+
+      if (this.publicationFilter !== 'all') {
+        filtered = filtered.filter(pub => pub.type === this.publicationFilter);
+      }
+
+      const userQuery = this.publicationUserFilter.toLowerCase().trim();
+      if (userQuery) {
+        const matchingUserIds = this.users
+          .filter(user => {
+            const fullName = `${user.nombre} ${user.apellidos}`.toLowerCase();
+            return fullName.includes(userQuery);
+          })
+          .map(user => user.id);
+        
+        if (matchingUserIds.length > 0) {
+          filtered = filtered.filter(pub => matchingUserIds.includes(pub.user_id));
+        } else {
+          return [];
+        }
+      }
+
+      return filtered;
+    },
+    filteredUsers() {
+      if (!this.userSearchQuery) {
+        return this.users;
+      }
+      const query = this.userSearchQuery.toLowerCase().trim();
+      return this.users.filter(user => {
+        const fullName = `${user.nombre} ${user.apellidos}`.toLowerCase();
+        return fullName.includes(query);
+      });
     }
   },
   mounted() {
@@ -140,6 +194,9 @@ export default {
   },
   methods: {
     ...mapActions(['logout']),
+    goToCreateUser() {
+      this.$router.push('/admin/users/create');
+    },
     async handleLogout() {
       try {
         await this.logout();
@@ -209,7 +266,7 @@ export default {
       }
     },
     editPublication(pub) {
-      if (pub.type === 'Habitación' || pub.type === 'Habitacion' || pub.type === 'Room') {
+      if (pub.type === 'Habitacion') {
         this.$router.push(`/admin/publications/room/${pub.id}/edit`);
       } else {
         this.$router.push(`/admin/publications/profile/${pub.id}/edit`);
@@ -255,7 +312,11 @@ export default {
       return words.slice(0, maxWords).join(' ') + '...';
     },
     isCurrentAdmin(user) {
-      return this.currentUser && user.id === this.currentUser.id;
+      return this.currentUser?.id === user.id;
+    },
+    getUserName(userId) {
+      const user = this.users.find(u => u.id === userId);
+      return user ? `${user.nombre} ${user.apellidos}` : `ID: ${userId}`;
     }
   }
 }
@@ -397,16 +458,32 @@ export default {
   color: #c0392b;
 }
 .filter-bar {
-  margin-bottom: 16px;
+  margin-bottom: 20px;
   display: flex;
   align-items: center;
-  gap: 10px;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.filter-bar .search-bar {
+  flex-grow: 1;
+}
+.publication-search {
+  max-width: 400px;
 }
 .filter-select {
-  padding: 6px 12px;
-  border-radius: 6px;
+  padding: 10px 12px;
+  border-radius: 8px;
   border: 1px solid #ccc;
-  font-size: 15px;
+  font-size: 16px;
+  background-color: white;
+  height: 42px; /* Alineación con la barra de búsqueda */
+}
+.filter-bar label {
+  font-weight: bold;
+  color: #2c3e50;
+  margin-right: 10px;
+  display: block;
+  margin-bottom: 5px;
 }
 .actions-cell {
   display: flex;
@@ -435,6 +512,50 @@ export default {
 }
 .edit-btn:hover {
   background: #2176ae;
+}
+.user-actions {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.search-bar {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 0 10px;
+  flex-grow: 1;
+  max-width: 400px;
+}
+.search-icon {
+  color: #999;
+  margin-right: 8px;
+}
+.search-input {
+  border: none;
+  outline: none;
+  padding: 10px 0;
+  font-size: 16px;
+  width: 100%;
+  background: transparent;
+}
+.create-user-btn {
+  background-color: #28a745;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  flex-shrink: 0;
+}
+.create-user-btn:hover {
+  background-color: #218838;
 }
 .header-actions {
   display: flex;

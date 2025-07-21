@@ -57,7 +57,9 @@ const upload = multer({ storage });
 
 // Register
 router.post('/register', upload.single('foto_perfil'), async (req, res) => {
-  const { nombre, apellidos, correo_institucional, password, carrera_id, genero, edad, whatsapp, instagram } = req.body;
+  let { nombre, apellidos, correo_institucional, password, carrera_id, genero, edad, whatsapp, instagram } = req.body;
+  // Convert email to lowercase
+  correo_institucional = correo_institucional.toLowerCase();
   if (!isInstitutionalEmail(correo_institucional)) {
     return res.status(400).json({ error: 'Email not allowed' });
   }
@@ -94,7 +96,9 @@ router.post('/register', upload.single('foto_perfil'), async (req, res) => {
 
 // Login
 router.post('/login', async (req, res) => {
-  const { correo_institucional, password } = req.body;
+  const { password } = req.body;
+  const correo_institucional = req.body.correo_institucional.toLowerCase();
+  
   const result = await pool.query('SELECT * FROM estudiante WHERE correo_institucional = $1', [correo_institucional]);
   const user = result.rows[0];
   if (!user) return res.status(401).json({ error: 'Invalid credentials' });

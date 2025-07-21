@@ -177,15 +177,23 @@ export default {
       } catch (photoErr) {
         this.room.photos = [];
       }
-      // Asignar valores a los campos del formulario (convierte nombres a IDs)
+      // Asignar valores a los campos del formulario (convierte nombres a IDs si es necesario)
+      function getReqId(val) {
+        if (!val) return '';
+        // If it's a number or numeric string, use as is
+        if (!isNaN(val)) return Number(val);
+        // Otherwise, look up by name
+        const req = this.requisitosDisponibles.find(r => r.nombre === val);
+        return req ? req.id : '';
+      }
       this.formData = {
         location: this.room.location,
         price: this.room.price,
         contractType: this.room.contract_type || '',
         description: this.room.description,
-        requirement1: this.getRequirementIdByName(this.room.requirements[0]),
-        requirement2: this.getRequirementIdByName(this.room.requirements[1]),
-        requirement3: this.getRequirementIdByName(this.room.requirements[2]),
+        requirement1: getReqId.call(this, this.room.requirements[0]),
+        requirement2: getReqId.call(this, this.room.requirements[1]),
+        requirement3: getReqId.call(this, this.room.requirements[2]),
         photo1: this.room.photos[0] || null,
         photo2: this.room.photos[1] || null,
         photo3: this.room.photos[2] || null,

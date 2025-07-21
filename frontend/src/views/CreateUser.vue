@@ -1,10 +1,10 @@
 <template>
   <div class="register-container">
     <header class="header">
-      <router-link to="/login" class="back-button">
+      <router-link to="/admin/dashboard" class="back-button">
         <i class="fa-solid fa-arrow-left"></i>
       </router-link>
-      <h1>REGISTRO</h1>
+      <h1>Crear Nuevo Usuario</h1>
       <div class="header-spacer"></div>
     </header>
 
@@ -139,7 +139,7 @@
           </div>
         </div>
 
-        <button type="submit" class="register-button">REGISTRAR</button>
+        <button type="submit" class="register-button">Crear Usuario</button>
       </form>
     </main>
   </div>
@@ -148,7 +148,7 @@
 <script>
 import axios from 'axios';
 export default {
-  name: 'Register',
+  name: 'CreateUser',
   data() {
     return {
       formData: {
@@ -214,7 +214,8 @@ export default {
           alert('Por favor, utiliza tu correo institucional (@alumnos.uneatlantico.es)')
           return
         }
-        // Enviar datos al backend
+        
+        const token = localStorage.getItem('token');
         const formData = new FormData();
         formData.append('nombre', this.formData.nombre);
         formData.append('apellidos', this.formData.apellidos);
@@ -228,24 +229,23 @@ export default {
         if (this.formData.foto_perfil) {
           formData.append('foto_perfil', this.formData.foto_perfil);
         }
-        // Log para depuración
-        for (let [k, v] of formData.entries()) {
-          console.log(k, v);
-        }
+        
         await axios.post(
-          `${import.meta.env.VITE_API_URL || 'http://localhost:3000/api'}/auth/register`,
-          formData
+          `${import.meta.env.VITE_API_URL || 'http://localhost:3000/api'}/admin/users`,
+          formData, {
+            headers: { Authorization: `Bearer ${token}` }
+          }
         );
-        this.$router.push('/login');
+
+        alert('Usuario creado con éxito');
+        this.$router.push('/admin/dashboard');
       } catch (error) {
-        if (error.response && error.response.status === 400 && error.response.data.error === 'Email not allowed') {
-          window.alert('No tienes acceso. Tu correo no está autorizado.');
-        } else if (error.response && error.response.data && error.response.data.error) {
+        if (error.response && error.response.data && error.response.data.error) {
           window.alert(error.response.data.error);
         } else {
-          window.alert('Error al registrar. Intenta de nuevo.');
+          window.alert('Error al crear el usuario. Intenta de nuevo.');
         }
-        console.error('Register error:', error);
+        console.error('Create user error:', error);
       }
     }
   }
@@ -253,6 +253,7 @@ export default {
 </script>
 
 <style scoped>
+/* Copiando los estilos de Register.vue */
 .register-container {
   min-height: 100vh;
   background-color: #f5f5f5;
@@ -416,23 +417,5 @@ export default {
   color: #e74c3c;
   font-size: 12px;
   margin-top: 4px;
-}
-
-@media (max-width: 768px) {
-  .main-content {
-    padding: 15px;
-  }
-
-  .form-group input,
-  .form-group select,
-  .social-input input {
-    padding: 10px;
-    font-size: 14px;
-  }
-
-  .profile-upload {
-    width: 120px;
-    height: 120px;
-  }
 }
 </style> 

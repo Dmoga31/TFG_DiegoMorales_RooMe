@@ -57,10 +57,10 @@ export default {
       this.error = ''
       this.loading = true
       try {
-        const user = await this.login({ correo_institucional: this.email, password: this.password })
+        const user = await this.login({ correo_institucional: this.email.toLowerCase(), password: this.password })
         // Redirigir según el rol
         if (user && (user.rol === 'Admin' || user.rol === 'admin' || user.role === 'admin')) {
-          this.$router.push('/admin')
+          this.$router.push('/admin/dashboard')
         } else {
           this.$router.push('/menu')
         }

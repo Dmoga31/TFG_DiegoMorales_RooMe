@@ -64,10 +64,10 @@
         <div class="publisher-info-responsive centered-contact" v-if="publisher">
           <div class="social-links contact-chips">
             <a v-if="publisher?.whatsapp" :href="'https://wa.me/' + publisher.whatsapp" class="contact-chip" title="Contactar por WhatsApp" target="_blank" rel="noopener">
-              📱 WhatsApp
+              📱 {{ publisher.whatsapp }}
             </a>
             <a v-if="publisher?.instagram" :href="'https://instagram.com/' + publisher.instagram" class="contact-chip" title="Ver Instagram" target="_blank" rel="noopener">
-              📸 Instagram
+              📸 {{ publisher.instagram }}
             </a>
           </div>
         </div>
@@ -83,7 +83,6 @@
 <script>
 import axios from 'axios';
 import { mapGetters } from 'vuex';
-
 export default {
   name: 'ProfileDetail',
   data() {

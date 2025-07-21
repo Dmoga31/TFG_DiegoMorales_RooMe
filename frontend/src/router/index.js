@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import AdminDashboard from '../views/AdminDashboard.vue'
+import CreateUser from '../views/CreateUser.vue'
 import EditProfile from '../views/EditProfile.vue'
 import EditProfilePubli from '../views/EditProfilePubli.vue'
 import EditRoomPubli from '../views/EditRoomPubli.vue'
@@ -111,27 +112,41 @@ const routes = [
     meta: { requiresAuth: true }
   },
   {
-    path: '/admin',
+    path: '/admin/dashboard',
     name: 'AdminDashboard',
     component: AdminDashboard,
+    meta: { requiresAuth: true, adminOnly: true }
+  },
+  {
+    path: '/admin',
+    redirect: '/admin/dashboard',
     meta: { requiresAuth: true, adminOnly: true }
   },
   {
     path: '/admin/users/:id/edit',
     name: 'EditUser',
     component: EditUser,
+    props: true,
+    meta: { requiresAuth: true, adminOnly: true }
+  },
+  {
+    path: '/admin/users/create',
+    name: 'CreateUser',
+    component: CreateUser,
     meta: { requiresAuth: true, adminOnly: true }
   },
   {
     path: '/admin/publications/room/:id/edit',
-    name: 'EditRoomPubliAdmin',
+    name: 'AdminEditRoom',
     component: EditRoomPubli,
+    props: true,
     meta: { requiresAuth: true, adminOnly: true }
   },
   {
     path: '/admin/publications/profile/:id/edit',
-    name: 'EditProfilePubliAdmin',
+    name: 'AdminEditProfile',
     component: EditProfilePubli,
+    props: true,
     meta: { requiresAuth: true, adminOnly: true }
   }
 ]
@@ -143,24 +158,25 @@ const router = createRouter({
 
 // Guard mejorado para rutas adminOnly
 router.beforeEach((to, from, next) => {
+  const token = localStorage.getItem('token');
+  const user = JSON.parse(localStorage.getItem('user'));
+
   if (to.matched.some(record => record.meta.requiresAuth)) {
-    const user = localStorage.getItem('user')
-    if (!user) {
-      next('/login')
+    if (!token) {
+      next('/login');
     } else {
       if (to.matched.some(record => record.meta.adminOnly)) {
-        const userObj = JSON.parse(user)
-        if (userObj.rol === 'Admin' || userObj.rol === 'admin' || userObj.role === 'admin') {
-          next()
+        if (user && (user.rol === 'Admin' || user.rol === 'admin' || user.role === 'admin')) {
+          next();
         } else {
-          next('/menu')
+          next('/menu'); // o a una página de 'no autorizado'
         }
       } else {
-        next()
+        next();
       }
     }
   } else {
-    next()
+    next();
   }
 })
 

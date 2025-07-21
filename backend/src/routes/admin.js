@@ -1,8 +1,31 @@
 const express = require('express');
 const pool = require('../../config/db');
 const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
+const multer = require('multer');
+const path = require('path');
+const fs = require('fs');
 
 const router = express.Router();
+
+// Ensure uploads directory exists
+const uploadsDir = path.join(__dirname, '../../uploads');
+if (!fs.existsSync(uploadsDir)) {
+  fs.mkdirSync(uploadsDir, { recursive: true });
+}
+
+// Multer storage configuration
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, uploadsDir);
+  },
+  filename: function (req, file, cb) {
+    const ext = path.extname(file.originalname);
+    const uniqueName = `user_${Date.now()}${ext}`;
+    cb(null, uniqueName);
+  }
+});
+const upload = multer({ storage });
 
 // Middleware: JWT auth and admin check
 function adminAuth(req, res, next) {
@@ -17,6 +40,57 @@ function adminAuth(req, res, next) {
     res.status(401).json({ error: 'Invalid token' });
   }
 }
+
+// Admin: Crear un nuevo usuario
+router.post('/users', adminAuth, upload.single('foto_perfil'), async (req, res) => {
+  let { nombre, apellidos, correo_institucional, password, carrera_id, genero, edad, whatsapp, instagram, rol = 'Estudiante' } = req.body;
+  // Convert email to lowercase
+  correo_institucional = correo_institucional.toLowerCase();
+  if (!nombre || !apellidos || !correo_institucional || !password || !carrera_id) {
+    return res.status(400).json({ error: 'Faltan campos obligatorios.' });
+  }
+
+  const client = await pool.connect();
+  try {
+    await client.query('BEGIN');
+
+    // Comprobar si el correo ya existe
+    const existingUser = await client.query('SELECT id FROM estudiante WHERE correo_institucional = $1', [correo_institucional]);
+    if (existingUser.rows.length > 0) {
+      return res.status(400).json({ error: 'El correo electrónico ya está registrado.' });
+    }
+
+    const hashed = await bcrypt.hash(password, 10);
+
+    // Insertar en estudiante
+    const estudianteResult = await client.query(
+      `INSERT INTO estudiante (nombre, apellidos, correo_institucional, password, rol) VALUES ($1, $2, $3, $4, $5) RETURNING id`,
+      [nombre, apellidos, correo_institucional, hashed, rol]
+    );
+    const estudianteId = estudianteResult.rows[0].id;
+
+    // Manejar foto de perfil
+    let fotoPerfilPath = null;
+    if (req.file) {
+      fotoPerfilPath = '/uploads/' + req.file.filename;
+    }
+
+    // Insertar en informacion_personal
+    await client.query(
+      `INSERT INTO informacion_personal (estudiante_id, carrera_id, genero, edad, whatsapp, instagram, foto_perfil) VALUES ($1, $2, $3, $4, $5, $6, $7)`,
+      [estudianteId, carrera_id, genero, edad, whatsapp, instagram, fotoPerfilPath]
+    );
+
+    await client.query('COMMIT');
+    res.status(201).json({ success: true, userId: estudianteId });
+  } catch (err) {
+    await client.query('ROLLBACK');
+    console.error('Error al crear usuario (admin):', err);
+    res.status(500).json({ error: 'Error interno del servidor.' });
+  } finally {
+    client.release();
+  }
+});
 
 // List all users (estudiantes)
 router.get('/users', adminAuth, async (req, res) => {
@@ -33,7 +107,11 @@ router.get('/users', adminAuth, async (req, res) => {
 router.get('/users/:id', adminAuth, async (req, res) => {
   const { id } = req.params;
   const result = await pool.query(
-    `SELECT id, nombre, apellidos, correo_institucional, rol FROM estudiante WHERE id = $1`,
+    `SELECT e.id, e.nombre, e.apellidos, e.correo_institucional, e.rol,
+            ip.carrera_id, ip.genero, ip.edad, ip.whatsapp, ip.instagram, ip.foto_perfil
+     FROM estudiante e
+     LEFT JOIN informacion_personal ip ON ip.estudiante_id = e.id
+     WHERE e.id = $1`,
     [id]
   );
   if (!result.rows[0]) return res.status(404).json({ error: 'User not found' });
@@ -41,17 +119,65 @@ router.get('/users/:id', adminAuth, async (req, res) => {
 });
 
 // Editar usuario (admin)
-router.put('/users/:id', adminAuth, async (req, res) => {
+router.put('/users/:id', adminAuth, upload.single('foto_perfil'), async (req, res) => {
   const { id } = req.params;
-  const { nombre, apellidos, correo_institucional, rol } = req.body;
+  let {
+    nombre, apellidos, correo_institucional, rol,
+    carrera_id, genero, edad, whatsapp, instagram
+  } = req.body;
+
   if (!nombre || !apellidos || !correo_institucional || !rol) {
     return res.status(400).json({ error: 'Faltan campos obligatorios' });
   }
-  await pool.query(
-    `UPDATE estudiante SET nombre = $1, apellidos = $2, correo_institucional = $3, rol = $4 WHERE id = $5`,
-    [nombre, apellidos, correo_institucional, rol, id]
-  );
-  res.json({ success: true });
+
+  const client = await pool.connect();
+  try {
+    await client.query('BEGIN');
+
+    // Update estudiante
+    await client.query(
+      `UPDATE estudiante SET nombre = $1, apellidos = $2, correo_institucional = $3, rol = $4 WHERE id = $5`,
+      [nombre, apellidos, correo_institucional, rol, id]
+    );
+
+    // Prepare photo path if uploaded
+    let fotoPerfilPath = null;
+    if (req.file) {
+      fotoPerfilPath = '/uploads/' + req.file.filename;
+    }
+
+    // Update informacion_personal
+    // Check if row exists
+    const infoRes = await client.query('SELECT estudiante_id FROM informacion_personal WHERE estudiante_id = $1', [id]);
+    if (infoRes.rows.length > 0) {
+      // Update existing row
+      await client.query(
+        `UPDATE informacion_personal SET
+          carrera_id = $1, genero = $2, edad = $3, whatsapp = $4, instagram = $5
+          ${fotoPerfilPath ? ', foto_perfil = $6' : ''}
+         WHERE estudiante_id = $${fotoPerfilPath ? 7 : 6}`,
+        fotoPerfilPath
+          ? [carrera_id, genero, edad, whatsapp, instagram, fotoPerfilPath, id]
+          : [carrera_id, genero, edad, whatsapp, instagram, id]
+      );
+    } else {
+      // Insert new row if not exists
+      await client.query(
+        `INSERT INTO informacion_personal (estudiante_id, carrera_id, genero, edad, whatsapp, instagram, foto_perfil)
+         VALUES ($1, $2, $3, $4, $5, $6, $7)` ,
+        [id, carrera_id, genero, edad, whatsapp, instagram, fotoPerfilPath]
+      );
+    }
+
+    await client.query('COMMIT');
+    res.json({ success: true });
+  } catch (err) {
+    await client.query('ROLLBACK');
+    console.error('Error updating user (admin):', err);
+    res.status(500).json({ error: 'Error interno del servidor.' });
+  } finally {
+    client.release();
+  }
 });
 
 // Delete user (estudiante)

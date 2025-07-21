@@ -80,10 +80,10 @@
               </div>
               <div class="social-links">
                 <a v-if="publisher?.whatsapp" :href="'https://wa.me/' + publisher.whatsapp" class="social-link" title="Contactar por WhatsApp">
-                  📱 WhatsApp
+                  📱 {{ publisher.whatsapp }}
                 </a>
                 <a v-if="publisher?.instagram" :href="'https://instagram.com/' + publisher.instagram" class="social-link" title="Ver Instagram">
-                  📸 Instagram
+                  📸 {{ publisher.instagram }}
                 </a>
               </div>
             </div>
