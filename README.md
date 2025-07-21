@@ -1,68 +1,78 @@
-# RooMe: Full-Stack Architecture
+# RooMe - Plataforma de Alojamiento Universitario
 
-## Overview
-RooMe is a university-focused web application for students at Universidad Europea del Atlántico (UNEATLANTICO) to find shared housing and roommates. This project is structured as a full-stack, modular, and scalable application.
+## 📝 Descripción
+Aplicación web para facilitar la búsqueda de habitaciones y compañeros de piso entre estudiantes de la Universidad Europea del Atlántico.
 
-## Project Structure
+## ✨ Características principales
+- **Autenticación segura** con correo institucional (@alumnos.uneatlantico.es)
+- Dos tipos de publicaciones:
+  - 🏠 Habitaciones disponibles
+  - 👤 Perfiles para buscar roommates
+- Sistema de filtros avanzados (precio, ubicación, requisitos)
+- Gestión completa de publicaciones (editar, activar/desactivar, eliminar)
 
-```
-/roome/
-  /frontend/           # Vue.js app (Vercel-ready)
-    /src/
-      /components/
-      /pages/
-      /views/
-      /store/
-      /router/
-      /assets/
-      App.vue
-      main.js
-    /public/
-    package.json
-    vercel.json
-  /backend/            # Node.js + Express API (Supabase/Postgres)
-    /src/
-      /controllers/
-      /models/
-      /routes/
-      /middleware/
-      /utils/
-      /services/
-      app.js
-      server.js
-    /config/
-      db.js
-      supabase.js
-    package.json
-    .env
-  /database/
-    schema.sql         # PostgreSQL schema (ERD-based)
-    seed_students.xlsx # Institutional email list for validation
-  README.md
-```
+## 🛠️ Stack Tecnológico
+### Frontend
+<img width="200" height="200" alt="image" src="https://github.com/user-attachments/assets/b374c644-162d-4326-801a-c240e0c7b840" />
 
-## Key Features
-- **Authentication:** JWT, bcrypt, role-based middleware, registration with institutional email validation (Excel or Supabase RLS).
-- **User Roles:** Student, Admin.
-- **Publication Management:** Only 1 active profile and 1 active room per student.
-- **Admin Dashboard:** CRUD for users and posts, logs.
-- **Database:** Supabase (PostgreSQL).
-- **Frontend:** Vue.js, modular components, role-based routing.
-- **Deployment:** Vercel (frontend), Supabase (backend/db).
+**Vue.js** - Framework progresivo para interfaces de usuario
 
-## Deployment
-- Frontend: Deploy `/frontend` to Vercel.
-- Backend: Deploy `/backend` to a Node.js host or Supabase Edge Functions.
-- Database: Use Supabase (PostgreSQL).
+### Backend
+<img width="400" height="400" alt="image" src="https://github.com/user-attachments/assets/fd318e4c-4101-4c33-8953-d754cf91f2f6" />
 
-## Getting Started
-1. Clone the repo.
-2. Install dependencies in both `/frontend` and `/backend`.
-3. Set up Supabase project and import `/database/schema.sql`.
-4. Place `seed_students.xlsx` in `/database/` for email validation.
-5. Configure environment variables in `/backend/.env`.
-6. Run backend and frontend locally for development.
+**Node.js** con **Express** - Entorno de ejecución y framework web
 
----
+### Base de Datos
+<img width="200" height="200" alt="image" src="https://github.com/user-attachments/assets/13595e02-6443-4702-b916-3e01aed24634" />
 
-For more details, see the documentation in each folder and the thesis/UML documents.
+**PostgreSQL** - Sistema de gestión de bases de datos relacional
+
+### Plataformas de Despliegue
+<img width="250" height="450" alt="image" src="https://github.com/user-attachments/assets/e1979fdf-baf0-4c8b-b4ef-6052f8102ee2" />
+
+**Vercel** - Para el frontend (https://vercel.com)
+
+
+<img width="250" height="450" alt="image" src="https://github.com/user-attachments/assets/426607a8-4297-4f13-8d07-657bfa4c42d9" />
+
+**Railway** - Para backend y base de datos (https://railway.app)
+
+## Comparativa de Tecnologías y Herramientas de Despliegue
+
+| Categoría                | Tecnología / Herramienta   | Ventajas principales                                                                 |
+|--------------------------|----------------------------|----------------------------------------------------------------------------------------|
+| **Frontend**             | **Vue.js**                 | - Curva de aprendizaje baja  <br> - Alta reactividad y rendimiento  <br> - Comunidad activa |
+| **Backend**              | **Node.js + Express**      | - Arquitectura ligera y eficiente para APIs REST  <br> - Uso de JavaScript full-stack |
+| **Base de Datos**        | **PostgreSQL**             | - Sistema robusto y fiable  <br> - Soporte para consultas complejas y relaciones      |
+| **Despliegue Frontend**  | **Vercel**                 | - Fácil integración con GitHub  <br> - Deploy automático  <br> - CDN global de alto rendimiento |
+| **Despliegue Backend + DB** | **Railway**             | - Panel intuitivo  <br> - Rápida configuración de servidor y base de datos  <br> - Escalabilidad sencilla |
+
+
+
+## 📊 Diagramas UML
+
+### Modelo de Dominio
+<img width="667" height="968" alt="image" src="https://github.com/user-attachments/assets/7e8c6b61-a438-42bb-a888-e53829442c33" />
+
+### Actores
+<img width="674" height="392" alt="image" src="https://github.com/user-attachments/assets/1d746e75-4bc2-4a2a-a78a-7f28f16eec4d" />
+
+### Casos de uso
+
+#### Usuarios no registrados
+<img width="357" height="99" alt="image" src="https://github.com/user-attachments/assets/8323de5b-fb53-4747-b843-c3e05affbc42" />
+
+#### Estudiante
+<img width="1296" height="987" alt="image" src="https://github.com/user-attachments/assets/f95b5bd1-7c81-4d38-820c-814ab038733f" />
+
+#### Administrador
+<img width="674" height="934" alt="image" src="https://github.com/user-attachments/assets/b844f8f2-e363-4761-96ae-5d2191baa2c7" />
+
+### Diagramas de contexto
+
+#### Estudiante
+<img width="1112" height="752" alt="image" src="https://github.com/user-attachments/assets/c7c2d1c2-1583-4679-8136-53abed047d5f" />
+
+#### Administrador
+<img width="1320" height="923" alt="image" src="https://github.com/user-attachments/assets/56d9a900-08c5-4e34-a260-810194d218d9" />
+
