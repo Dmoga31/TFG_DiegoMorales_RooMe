@@ -79,7 +79,7 @@ Aplicación web para facilitar la búsqueda de habitaciones y compañeros de pis
 
 ## 📁 Enlaces a carpetas de diagramas UML
 - [📂 Diagrama de entidad-relación](https://github.com/Dmoga31/TFG_DiegoMorales_RooMe/tree/main/UMLs/Diagramas/Diagrama_entidad_relacion)
-- [📂 Diagrama de estados](https://github.com/Dmoga31/TFG_DiegoMorales_RooMe/tree/main/UMLs/Diagramas/Diagrama_estados)
+- [📂 Diagrama de estados](https://github.com/Dmoga31/TFG_DiegoMorales_RooMe/tree/main/UMLs/Diagramas/Diagrama_de_estados)
 - [📂 Especificaciones de casos de uso](https://github.com/Dmoga31/TFG_DiegoMorales_RooMe/tree/main/UMLs/Especificaciones_de_casos_de_uso)
 
 
