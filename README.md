@@ -1,15 +1,24 @@
-# RooMe - Plataforma de Alojamiento Universitario
+# RooMe - Aplicación web para la coordinación de alquiler de viviendas para universitarios en Santander, Cantabria
 
 ## 📝 Descripción
 Aplicación web para facilitar la búsqueda de habitaciones y compañeros de piso entre estudiantes de la Universidad Europea del Atlántico.
 
 ## ✨ Características principales
 - **Autenticación segura** con correo institucional (@alumnos.uneatlantico.es)
-- Dos tipos de publicaciones:
+- **Dos tipos** de publicaciones:
   - 🏠 Habitaciones disponibles
   - 👤 Perfiles para buscar roommates
-- Sistema de filtros avanzados (precio, ubicación, requisitos)
-- Gestión completa de publicaciones (editar, activar/desactivar, eliminar)
+- Sistema de **filtros avanzados**:
+    - Para habitación:
+        - Tipo de contrato (fijo o escolar)
+        - Requisitos (no fumar, limpieza
+        - Puntualidad en pagos, etc)
+        - Precio (mínimo y máximo)
+    - Para publicación tipo "Perfil RooMe"
+        - Género (Mujer, Hombre u otro)
+        - Hobbies (deporte, ver películas, escuchar música, etc)
+        - Presupuesto (mínimo y máximo) 
+- **Gestión completa** de publicaciones (editar, activar/desactivar, eliminar)
 
 ## 🛠️ Stack Tecnológico
 ### Frontend
@@ -39,29 +48,38 @@ Aplicación web para facilitar la búsqueda de habitaciones y compañeros de pis
 
 
 ## 📊 Diagramas UML
+ - ### [Modelo de dominio](https://github.com/Dmoga31/TFG_DiegoMorales_RooMe/tree/main/UMLs/Modelo_de_dominio)
+  <img width="596" height="561" alt="image" src="https://github.com/user-attachments/assets/bbf58c1e-ab75-4a89-8606-4270f0c7c339" />
 
-### Modelo de Dominio
-<img width="596" height="561" alt="image" src="https://github.com/user-attachments/assets/bbf58c1e-ab75-4a89-8606-4270f0c7c339" />
-
-### Actores
-<img width="674" height="392" alt="image" src="https://github.com/user-attachments/assets/1d746e75-4bc2-4a2a-a78a-7f28f16eec4d" />
+ - ### [Jerarquia de actores](https://github.com/Dmoga31/TFG_DiegoMorales_RooMe/tree/main/UMLs/Jerarquia_de_actores)
+  <img width="674" height="392" alt="image" src="https://github.com/user-attachments/assets/1d746e75-4bc2-4a2a-a78a-7f28f16eec4d" />
 
 ### Casos de uso
 
-#### Usuarios no registrados
-<img width="357" height="99" alt="image" src="https://github.com/user-attachments/assets/8323de5b-fb53-4747-b843-c3e05affbc42" />
+ - #### [Usuarios no registrados](https://github.com/Dmoga31/TFG_DiegoMorales_RooMe/tree/main/UMLs/Casos_de_uso/Usuario_no_registrado)
+  <img width="357" height="99" alt="image" src="https://github.com/user-attachments/assets/8323de5b-fb53-4747-b843-c3e05affbc42" />
 
-#### Estudiante
-<img width="1296" height="987" alt="image" src="https://github.com/user-attachments/assets/f95b5bd1-7c81-4d38-820c-814ab038733f" />
+ - #### [Estudiante](https://github.com/Dmoga31/TFG_DiegoMorales_RooMe/tree/main/UMLs/Casos_de_uso/Estudiante/Detalle_y_estructura_casos_de_uso)
+  <img width="1296" height="987" alt="image" src="https://github.com/user-attachments/assets/f95b5bd1-7c81-4d38-820c-814ab038733f" />
 
-#### Administrador
-<img width="674" height="934" alt="image" src="https://github.com/user-attachments/assets/b844f8f2-e363-4761-96ae-5d2191baa2c7" />
+ - #### [Administrador](https://github.com/Dmoga31/TFG_DiegoMorales_RooMe/tree/main/UMLs/Casos_de_uso/Administrador/Detalle_y_estructura_casos_de_uso)
+  <img width="674" height="934" alt="image" src="https://github.com/user-attachments/assets/b844f8f2-e363-4761-96ae-5d2191baa2c7" />
 
 ### Diagramas de contexto
 
-#### Estudiante
-<img width="1112" height="752" alt="image" src="https://github.com/user-attachments/assets/c7c2d1c2-1583-4679-8136-53abed047d5f" />
+ - #### [Estudiante](https://github.com/Dmoga31/TFG_DiegoMorales_RooMe/tree/main/UMLs/Diagramas/Diagrama_de_contexto/Estudiante)
+  <img width="1112" height="752" alt="image" src="https://github.com/user-attachments/assets/c7c2d1c2-1583-4679-8136-53abed047d5f" />
 
-#### Administrador
-<img width="1320" height="923" alt="image" src="https://github.com/user-attachments/assets/56d9a900-08c5-4e34-a260-810194d218d9" />
+ - #### [Administrador](https://github.com/Dmoga31/TFG_DiegoMorales_RooMe/tree/main/UMLs/Diagramas/Diagrama_de_contexto/Administrador)
+  <img width="1320" height="923" alt="image" src="https://github.com/user-attachments/assets/56d9a900-08c5-4e34-a260-810194d218d9" />
+
+- ### [Diagrama de despliegue](https://github.com/Dmoga31/TFG_DiegoMorales_RooMe/tree/main/UMLs/Diagramas/Diagrama_de_despliegue)
+<img width="988" height="212" alt="image" src="https://github.com/user-attachments/assets/20812760-5f5a-417f-9aec-9fd7f6e7b00a" />
+
+
+## 📁 Enlaces a carpetas de diagramas UML
+- [📂 Diagrama de entidad-relación](https://github.com/Dmoga31/TFG_DiegoMorales_RooMe/tree/main/UMLs/Diagramas/Diagrama_entidad_relacion)
+- [📂 Diagrama de estados](https://github.com/Dmoga31/TFG_DiegoMorales_RooMe/tree/main/UMLs/Diagramas/Diagrama_estados)
+- [📂 Especificaciones de casos de uso](https://github.com/Dmoga31/TFG_DiegoMorales_RooMe/tree/main/UMLs/Especificaciones_de_casos_de_uso)
+
 
