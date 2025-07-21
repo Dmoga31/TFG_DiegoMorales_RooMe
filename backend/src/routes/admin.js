@@ -195,6 +195,7 @@ router.get('/publications', adminAuth, async (req, res) => {
     FROM publicacion p
     JOIN publicacion_perfil_roome pr ON pr.publicacion_id = p.id
     WHERE p.tipo = 'Perfil'
+    ORDER BY p.id ASC
   `);
   // Habitaciones
   const rooms = await pool.query(`
@@ -202,8 +203,14 @@ router.get('/publications', adminAuth, async (req, res) => {
     FROM publicacion p
     JOIN publicacion_habitacion h ON h.publicacion_id = p.id
     WHERE p.tipo = 'Habitacion'
+    ORDER BY p.id ASC
   `);
-  res.json([...profiles.rows, ...rooms.rows]);
+  
+  // Combine and sort the final results
+  const allPublications = [...profiles.rows, ...rooms.rows];
+  allPublications.sort((a, b) => a.id - b.id);
+  
+  res.json(allPublications);
 });
 
 // Cambiar estado de cualquier publicación (admin)
