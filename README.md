@@ -49,37 +49,40 @@ Aplicación web para facilitar la búsqueda de habitaciones y compañeros de pis
 
 ## 📊 Diagramas UML
  - ### [Modelo de dominio](https://github.com/Dmoga31/TFG_DiegoMorales_RooMe/tree/main/UMLs/Modelo_de_dominio)
-  <img width="596" height="561" alt="image" src="https://github.com/user-attachments/assets/bbf58c1e-ab75-4a89-8606-4270f0c7c339" />
+  ![Modelo_de_dominio](https://github.com/user-attachments/assets/5f8fe375-df5b-4ba4-88b9-4280362e598e)
 
  - ### [Jerarquia de actores](https://github.com/Dmoga31/TFG_DiegoMorales_RooMe/tree/main/UMLs/Jerarquia_de_actores)
-  <img width="674" height="392" alt="image" src="https://github.com/user-attachments/assets/1d746e75-4bc2-4a2a-a78a-7f28f16eec4d" />
+  ![Jerarquia_actores](https://github.com/user-attachments/assets/c4387d90-d09c-4963-8247-65208e51cd1c)
 
 ### Casos de uso
 
  - #### [Usuarios no registrados](https://github.com/Dmoga31/TFG_DiegoMorales_RooMe/tree/main/UMLs/Casos_de_uso/Usuario_no_registrado)
-  <img width="357" height="99" alt="image" src="https://github.com/user-attachments/assets/8323de5b-fb53-4747-b843-c3e05affbc42" />
+  ![Caso_uso_Usuario_no_registrado](https://github.com/user-attachments/assets/8df1bbd4-20f7-48b7-8bed-7ec2f02556af)
 
  - #### [Estudiante](https://github.com/Dmoga31/TFG_DiegoMorales_RooMe/tree/main/UMLs/Casos_de_uso/Estudiante/Detalle_y_estructura_casos_de_uso)
-  <img width="1296" height="987" alt="image" src="https://github.com/user-attachments/assets/f95b5bd1-7c81-4d38-820c-814ab038733f" />
+  ![Caso_uso_Estudiante](https://github.com/user-attachments/assets/80a67e09-2401-41ae-a246-017b1610c36d)
 
  - #### [Administrador](https://github.com/Dmoga31/TFG_DiegoMorales_RooMe/tree/main/UMLs/Casos_de_uso/Administrador/Detalle_y_estructura_casos_de_uso)
-  <img width="674" height="934" alt="image" src="https://github.com/user-attachments/assets/b844f8f2-e363-4761-96ae-5d2191baa2c7" />
+  ![Caso_uso_Administrador](https://github.com/user-attachments/assets/26ae567a-a28d-47be-9438-37d35d896cf0)
 
 ### Diagramas de contexto
 
  - #### [Estudiante](https://github.com/Dmoga31/TFG_DiegoMorales_RooMe/tree/main/UMLs/Diagramas/Diagrama_de_contexto/Estudiante)
-  <img width="1112" height="752" alt="image" src="https://github.com/user-attachments/assets/c7c2d1c2-1583-4679-8136-53abed047d5f" />
+   ![Diagrama_contexto_estudiante](https://github.com/user-attachments/assets/298ef061-6096-4801-93dc-ed73c7b07e1e)
 
  - #### [Administrador](https://github.com/Dmoga31/TFG_DiegoMorales_RooMe/tree/main/UMLs/Diagramas/Diagrama_de_contexto/Administrador)
-  <img width="1320" height="923" alt="image" src="https://github.com/user-attachments/assets/56d9a900-08c5-4e34-a260-810194d218d9" />
+  ![Diagrama_contexto_administradorsvg](https://github.com/user-attachments/assets/e8b19567-60df-4fd0-9a93-46dceaec8034)
+
+- ### [Diagrama de entidad-relación](https://github.com/Dmoga31/TFG_DiegoMorales_RooMe/tree/main/UMLs/Diagramas/Diagrama_entidad_relacion)
+  ![ENTIDAD_RELACION](https://github.com/user-attachments/assets/22ace656-88f9-409a-b2ad-98cf821eaaf8)
 
 - ### [Diagrama de despliegue](https://github.com/Dmoga31/TFG_DiegoMorales_RooMe/tree/main/UMLs/Diagramas/Diagrama_de_despliegue)
-<img width="988" height="212" alt="image" src="https://github.com/user-attachments/assets/20812760-5f5a-417f-9aec-9fd7f6e7b00a" />
+  ![Diagrama_despliegue](https://github.com/user-attachments/assets/0189f9c1-6a87-421e-9d18-e5878b1ce383)
 
 
 ## 📁 Enlaces a carpetas de diagramas UML
-- [📂 Diagrama de entidad-relación](https://github.com/Dmoga31/TFG_DiegoMorales_RooMe/tree/main/UMLs/Diagramas/Diagrama_entidad_relacion)
 - [📂 Diagrama de estados](UMLs/Diagramas/Diagramas_de_estados)
 - [📂 Especificaciones de casos de uso](https://github.com/Dmoga31/TFG_DiegoMorales_RooMe/tree/main/UMLs/Especificaciones_de_casos_de_uso)
+
 
 
