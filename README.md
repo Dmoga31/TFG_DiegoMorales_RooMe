@@ -58,6 +58,23 @@ El presente Trabajo Fin de Grado tiene como objetivo el desarrollo de RooMe, una
 - ### <ins>[Modelo de dominio](https://github.com/Dmoga31/TFG_DiegoMorales_RooMe/tree/main/UMLs/Modelo_de_dominio)</ins>
    ![Modelo_de_dominio](https://github.com/user-attachments/assets/5f8fe375-df5b-4ba4-88b9-4280362e598e)
 
+  ## <ins><img width="80" height="80" alt="image-9i1ErFlTWHQutVpbpDKTdE9oAUu15E" src="https://github.com/user-attachments/assets/1913909c-cb02-4a68-b235-b81b9a5f247d" /> Glosario</ins> 
+
+| Entidad                       | Descripción                                                                 |
+|------------------------------|-----------------------------------------------------------------------------|
+| `Estudiante`                 | Usuario principal del sistema. Puede crear publicaciones y gestionar su perfil. |
+| `InformacionPersonal`       | Datos personales del estudiante, como nombre, edad, correo, etc.            |
+| `Carrera`                   | Titulación o programa académico en el que está inscrito el estudiante.      |
+| `Publicacion`               | Entrada generada por un estudiante, puede ser de tipo habitación o perfil.  |
+| `PublicacionHabitacion`     | Publicación para ofrecer una habitación en un piso compartido.              |
+| `PublicacionPerfilRooMe`    | Publicación donde el estudiante indica que busca compañeros de piso.        |
+| `HabitacionFoto`            | Fotografías asociadas a una publicación de habitación.                      |
+| `HabitacionRequisito`       | Requisitos definidos para una habitación ofrecida.                          |
+| `Requisito`                 | Condiciones específicas para los compañeros de piso (ej: no fumar, limpieza).|
+| `PerfilHobby`              | Hobbies asociados a una publicación tipo perfil.                            |
+| `Hobby`                     | Actividades de interés del estudiante (ej: deporte, música, cine).          |
+
+
 - ### <ins>[Jerarquia de actores](https://github.com/Dmoga31/TFG_DiegoMorales_RooMe/tree/main/UMLs/Jerarquia_de_actores)</ins>
    ![Jerarquia_actores](https://github.com/user-attachments/assets/c4387d90-d09c-4963-8247-65208e51cd1c)
 
