@@ -58,10 +58,10 @@ Aplicación web para facilitar la búsqueda de habitaciones y compañeros de pis
  - #### [Usuarios no registrados](https://github.com/Dmoga31/TFG_DiegoMorales_RooMe/tree/main/UMLs/Casos_de_uso/Usuario_no_registrado)
    ![Caso_uso_Usuario_no_registrado](https://github.com/user-attachments/assets/8df1bbd4-20f7-48b7-8bed-7ec2f02556af)
 
- - #### [Estudiante](https://github.com/Dmoga31/TFG_DiegoMorales_RooMe/tree/main/UMLs/Casos_de_uso/Estudiante/Detalle_y_estructura_casos_de_uso)
+ - #### [Estudiante](https://github.com/Dmoga31/TFG_DiegoMorales_RooMe/tree/main/UMLs/Casos_de_uso/Estudiante)
    ![Caso_uso_Estudiante](https://github.com/user-attachments/assets/80a67e09-2401-41ae-a246-017b1610c36d)
 
- - #### [Administrador](https://github.com/Dmoga31/TFG_DiegoMorales_RooMe/tree/main/UMLs/Casos_de_uso/Administrador/Detalle_y_estructura_casos_de_uso)
+ - #### [Administrador](https://github.com/Dmoga31/TFG_DiegoMorales_RooMe/tree/main/UMLs/Casos_de_uso/Administrador)
    ![Caso_uso_Administrador](https://github.com/user-attachments/assets/26ae567a-a28d-47be-9438-37d35d896cf0)
 
 ### Diagramas de contexto
