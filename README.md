@@ -13,8 +13,7 @@ El presente Trabajo Fin de Grado tiene como objetivo el desarrollo de RooMe, una
 - Sistema de **filtros avanzados**:
     - Para habitación:
         - Tipo de contrato (fijo o escolar)
-        - Requisitos (no fumar, limpieza
-        - Puntualidad en pagos, etc)
+        - Requisitos (no fumar, limpieza, Puntualidad en pagos, etc)
         - Precio (mínimo y máximo)
     - Para publicación tipo "Perfil RooMe"
         - Género (Mujer, Hombre u otro)
