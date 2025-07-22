@@ -18,15 +18,15 @@
 
 
  - ## [Diagrama de estados](UMLs/Diagramas/Diagramas_de_estados)
-    - ### [Diagrama de estados de administrador](https://github.com/Dmoga31/TFG_DiegoMorales_RooMe/tree/main/UMLs/Diagramas/Diagramas_de_estados/Administrador)
+    - ### [Diagrama de estados de administrador](https://github.com/Dmoga31/TFG_DiegoMorales_RooMe/tree/main/UMLs/Diagramas/Diagramas_de_estados/Admin)
       ![Diagrama_estados_Admin](https://github.com/user-attachments/assets/9aedddbc-7369-4cb5-a001-f13a5dbfc0f2)
 
 
-    - ### [Diagrama de estados Estudiante](https://github.com/Dmoga31/TFG_DiegoMorales_RooMe/tree/main/UMLs/Diagramas/Diagramas_de_estados/Estudiante)
+    - ### [Diagrama de estados Estudiante](UMLs/Diagramas/Diagramas_de_estados/Estudiante)
       ![Diagrama_estados_Estudiante](https://github.com/user-attachments/assets/1cff7f24-5fe6-454f-bf54-bb7d3ee4cb1b)
 
 
-     - ### [Diagrama de estados Publicación](https://github.com/Dmoga31/TFG_DiegoMorales_RooMe/tree/main/UMLs/Diagramas/Diagramas_de_estados/Publicacion)
+     - ### [Diagrama de estados Publicación](UMLs/Diagramas/Diagramas_de_estados/Publicacion)
        ![Diagrama_estados_Publicacion](https://github.com/user-attachments/assets/e406d793-317b-4a50-9c26-f675b0e322b4)
 
 
