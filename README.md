@@ -6,7 +6,7 @@ El presente Trabajo Fin de Grado tiene como objetivo el desarrollo de RooMe, una
 ---
 
 ## <ins><img width="80" height="80" alt="image-LfpfRdF2BugZEEpTgPQNhXOgbpJBMo" src="https://github.com/user-attachments/assets/24b392cf-82cc-4e54-ab97-1931b284dcc2" /> Características principales</ins>
-- **Autenticación segura** con correo institucional (@alumnos.uneatlantico.es)
+- **Autenticación segura** con correo institucional (@alumnos.uneatlantico.es). Al registrarse, el sistema valida el correo del estudiante con una [hoja de Excel interna](backend/database/seed_students.xlsx) para confirmar que pertenece a la universidad.
 - **Dos tipos** de publicaciones:
   - 🏠 Habitaciones disponibles
   - 👤 Perfiles para buscar roommates
