@@ -62,7 +62,7 @@ El presente Trabajo Fin de Grado tiene como objetivo el desarrollo de RooMe, una
 - ### <ins>[Jerarquia de actores](https://github.com/Dmoga31/TFG_DiegoMorales_RooMe/tree/main/UMLs/Jerarquia_de_actores)</ins>
    ![Jerarquia_actores](https://github.com/user-attachments/assets/c4387d90-d09c-4963-8247-65208e51cd1c)
 
-### <ins>Casos de uso</ins>
+### <ins>[Casos de uso](https://github.com/Dmoga31/TFG_DiegoMorales_RooMe/tree/main/UMLs/Casos_de_uso)</ins>
  - #### [Usuarios no registrados](https://github.com/Dmoga31/TFG_DiegoMorales_RooMe/tree/main/UMLs/Casos_de_uso/Usuario_no_registrado)
    ![Caso_uso_Usuario_no_registrado](https://github.com/user-attachments/assets/8df1bbd4-20f7-48b7-8bed-7ec2f02556af)
 
@@ -72,7 +72,7 @@ El presente Trabajo Fin de Grado tiene como objetivo el desarrollo de RooMe, una
  - #### [Administrador](https://github.com/Dmoga31/TFG_DiegoMorales_RooMe/tree/main/UMLs/Casos_de_uso/Administrador)
    ![Caso_uso_Administrador](https://github.com/user-attachments/assets/26ae567a-a28d-47be-9438-37d35d896cf0)
 
-### <ins>Diagramas de contexto</ins>
+### <ins>[Diagramas de contexto](https://github.com/Dmoga31/TFG_DiegoMorales_RooMe/tree/main/UMLs/Diagramas/Diagrama_de_contexto)</ins>
  - #### [Estudiante](https://github.com/Dmoga31/TFG_DiegoMorales_RooMe/tree/main/UMLs/Diagramas/Diagrama_de_contexto/Estudiante)
    ![Diagrama_contexto_estudiante](https://github.com/user-attachments/assets/298ef061-6096-4801-93dc-ed73c7b07e1e)
 
