@@ -13,7 +13,7 @@
    ![Diagrama_despliegue](https://github.com/user-attachments/assets/426493ff-6846-4732-8782-05f6bb8e44b1)
 
 
- - ## [Diagrama de entidad-relación](https://github.com/Dmoga31/TFG_DiegoMorales_RooMe/tree/main/UMLs/Diagramas/Diagrama_de_entidad_relacion)
+ - ## [Diagrama de entidad-relación](https://github.com/Dmoga31/TFG_DiegoMorales_RooMe/tree/main/UMLs/Diagramas/Diagrama_entidad_relacion)
    ![ENTIDAD_RELACION](https://github.com/user-attachments/assets/10e7e292-a1fe-4dfa-a6d7-8375ed554f79)
 
 
